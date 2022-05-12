@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Cocktail List</h1>
+
+{% for cocktail in cocktails %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ cocktail.name }}</span>
+      <p>Type: {{ cocktail.type }}</p>
+      <p>Description: {{ cocktail.description }}</p>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
