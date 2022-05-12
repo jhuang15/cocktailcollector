@@ -10,6 +10,14 @@
     <p>Description: {{ cocktail.description }}</p>
     <p>Difficulty: {{ cocktail.difficulty }}</p>
   </div>
+
+  <div class="card-action">
+    <a href="{% url 'cocktails_update' cocktail.id %}">Edit</a>
+    <a href="{% url 'cocktails_delete' cocktail.id %}">Delete</a>
+  </div>
+  
 </div>
+
+
 
 {% endblock %}
