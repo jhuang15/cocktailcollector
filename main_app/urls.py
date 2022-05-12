@@ -9,4 +9,5 @@ urlpatterns = [
   path('cocktails/create/', views.CocktailCreate.as_view(), name='cocktails_create'),
   path('cocktails/<int:pk>/update/', views.CocktailUpdate.as_view(), name='cocktails_update'),
   path('cocktails/<int:pk>/delete/', views.CocktailDelete.as_view(), name='cocktails_delete'),
+  path('cocktailss/<int:cocktail_id>/add_preference/', views.add_preference, name='add_preference'),
 ]
