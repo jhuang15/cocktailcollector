@@ -5,7 +5,6 @@
 
 <div class="row">
   <div class="col s6">
-
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ cocktail.name }}</span>
@@ -49,7 +48,54 @@
     </table>
   </div>
 </div>
-
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ cocktail.name }}'s Ingredients</h3>
+    {% if cocktail.ingredients.count %}
+      {% for ingredient in cocktail.ingredients.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <span style="color: green">{{ ingredient.unit }} </span>{{ ingredient.name }} <!-- span used to be here for color ???  from cat collector-->
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_ingredient' cocktail.id ingredient.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Ingredients :(</h5>
+    {% endif %}
+  </div>
+  <!-- Available ingredient will come after this line -->
+  <div class="col s6">
+    <h3>Available Ingredients</h3>
+    {% if ingredients.count %}
+      {% for ingredient in ingredients.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ ingredient.unit }} {{ ingredient.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_ingredient' cocktail.id ingredient.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{cocktail.name}} Already Has All Ingredients Available</h5>
+    {% endif %}
+  </div>
+</div>
 <script>
   const dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {
